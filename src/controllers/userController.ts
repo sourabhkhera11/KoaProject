@@ -1,5 +1,5 @@
 import { Context } from "node:vm";
-import {insertUser} from "../Repository/userRepo";
+import {insertUser, fetchAllUser} from "../Repository/userRepo";
 
 export class UserController{
 
@@ -60,6 +60,23 @@ export class UserController{
                 message: "Failed to create user",
                 error: er.message,
             };
+        }
+    }
+    static async fetchUsers(ctx: Context){
+        try{
+            const users=await fetchAllUser();
+            ctx.status=200;
+            ctx.body={
+                message: "Data fetched successfully",
+                data: users
+            }
+        }
+        catch(er){
+            ctx.status=400;
+            ctx.body={
+                message: "Bed request",
+                eror: er
+            }
         }
     }
 }

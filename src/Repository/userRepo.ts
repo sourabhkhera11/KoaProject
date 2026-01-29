@@ -1,6 +1,5 @@
 import {AppDataSource} from "../data-source";
 import { User } from "../entity/User";
-import { Gender } from "../entity/User";
 const userRepo=AppDataSource.getRepository(User);
 
 export async function insertUser(userData:any){
@@ -16,6 +15,16 @@ export async function insertUser(userData:any){
             email: userData.email
         });
         return user.name;
+    }
+    catch(er){
+        throw er;
+    }
+}
+
+export async function fetchAllUser() {
+    try{
+        const users=await userRepo.find();
+        return users;
     }
     catch(er){
         throw er;
