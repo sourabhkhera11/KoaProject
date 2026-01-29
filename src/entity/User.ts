@@ -14,7 +14,7 @@ export class User {
   @CreateDateColumn({ type: "timestamptz" })
   createdAt !: Date;
 
-  @Column({type : "varchar" })
+  @Column({type : "varchar"})
   name !: string;
 
   @Column({type : "varchar", length : 15, unique : true})
