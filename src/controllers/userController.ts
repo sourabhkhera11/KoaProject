@@ -6,14 +6,56 @@ export class UserController{
     static async createUser(ctx: Context){
         try{
             const userData=ctx.request.body;
-            const name=await insertUser(userData);
+            const {name,
+            contactNumber,
+            dob,
+            gender,
+            city,
+            interests, 
+            password,
+            email 
+            }=userData;
+
+            if(!name){
+                throw new Error("Name is required!");
+            }
+
+            if(!city){
+                throw new Error("City is required");
+            }
+
+            const phoneRegex = /^\+[1-9]\d{1,14}$/;
+
+            if (!phoneRegex.test(contactNumber)) {
+                throw new Error("Invalid contact number format");
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+            if (!emailRegex.test(email)) {
+                throw new Error("Invalid email format");
+            }
+
+            if (!['male','female','others'].includes(gender)){
+                throw new Error("Invalid gender!");
+            }
+
+            if( dob > Date.now() ){
+                throw  new Error("Not a valid dob!");
+            }
+            
+            if( interests.length===0){
+                throw new Error("Must have at least one interest!");
+            }
+
+            const value=await insertUser(userData);
             ctx.status=202;
             ctx.body={
-                message: `Welcome ${name}!`
+                message: `Welcome ${value}!`
             }
         }
         catch(er : any){
-            ctx.body=500;
+            ctx.body=400;
             ctx.body={
                 message: "Failed to create user",
                 error: er.message,
