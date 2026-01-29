@@ -1,9 +1,10 @@
 import Koa from "koa";
 const bodyParser =require("koa-bodyparser");
+import morgan from "koa-morgan";
 // import router from "./routes";
 
 const app = new Koa();
-
+app.use(morgan("dev"));
 app.use(bodyParser());
 // app.use(router.routes());
 // app.use(router.allowedMethods());
