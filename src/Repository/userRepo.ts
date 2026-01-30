@@ -2,8 +2,7 @@ import {AppDataSource} from "../data-source";
 import { User } from "../entity/User";
 const userRepo=AppDataSource.getRepository(User);
 
-//Use User entity type instead of any
-export async function insertUser(userData:any){
+export async function insertUser(userData:User){
     try{
         const user= await userRepo.save({
             name: userData.name,

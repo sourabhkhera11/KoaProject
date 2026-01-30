@@ -1,8 +1,6 @@
 import app from "./app";
 import { AppDataSource } from "./data-source";
-
-//Move port number to constants file
-const PORT = 3000;
+import { PORT } from "./utils/constant";
 
 AppDataSource.initialize()
   .then(() => {
