@@ -3,6 +3,7 @@ import { UserController } from "../controllers/userController";
 
 const router = new Router({prefix:"/users"});
 
+//add a space after comma
 router.post("/register",UserController.createUser);
 
 router.get('/allUsers',UserController.fetchUsers);

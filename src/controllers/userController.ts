@@ -24,6 +24,7 @@ export class UserController{
                 throw new Error("City is required");
             }
 
+            //create a helper function file and move regex logics there
             const phoneRegex = /^\+[1-9]\d{1,14}$/;
 
             if (!phoneRegex.test(contactNumber)) {
@@ -36,6 +37,7 @@ export class UserController{
                 throw new Error("Invalid email format");
             }
 
+            //use enum of Gender for validation
             if (!['male','female','others'].includes(gender)){
                 throw new Error("Invalid gender!");
             }
@@ -49,6 +51,7 @@ export class UserController{
             }
 
             const value=await insertUser(userData);
+            //status codes and messages can be moved to a constant.ts
             ctx.status=202;
             ctx.body={
                 message: `Welcome ${value}!`

@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
 
+//move enums to Enum.ts
 export enum Gender{
   MALE = 'male',
   FEMALE = 'female',
